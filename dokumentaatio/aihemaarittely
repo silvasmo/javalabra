@@ -1,5 +1,5 @@
 Aihe: toistoharjoittelu
-Ohjelma, jolla voi harjoitella sanapareja toiston avulla. Esimerkiksi vieraan kielen sanoja, maita ja pääkaupunkeja jne.
+Ohjelma, jolla voi harjoitella sanapareja toiston avulla. Esimerkiksi vieraan kielen sanoja, maita ja pääkaupunkeja jne. Ohjelma antaa sanaparin toisen osan ja käyttäjän pitää kirjoittaa sen pari.
 
 Käyttäjä: opiskelija/opettelija
 Toiminnot:
@@ -10,3 +10,4 @@ Muu toiminnallisuus:
 - sanaparien luku tiedostosta
 - sanojen järjestyksen sekoitus
 - tiedettyjen sanojen poistuminen kyseltävistä sanoista
+- pisteiden lasku
