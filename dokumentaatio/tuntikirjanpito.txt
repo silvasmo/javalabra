@@ -1,1 +1,3 @@
 16.12.  1h  github-repositorion luominen ja aihemäärittely
+17.12.  1h  aihemäärittely ja ohjelmoinnin aloitus
+18.12.  3h  ohjelmointi ja testaus

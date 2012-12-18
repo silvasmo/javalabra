@@ -1,0 +1,8 @@
+Helsinki,Suomi
+Tukholma,Ruotsi
+Oslo,Norja
+Kööpenhamina,Tanska
+Reykjavik,Islanti
+Tallinna,Viro
+Berliini,Saksa
+Pariisi,Ranska
