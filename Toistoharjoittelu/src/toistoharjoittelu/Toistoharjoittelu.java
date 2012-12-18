@@ -1,7 +1,7 @@
 
 package toistoharjoittelu;
 
-import toistoharjoittelu.sovelluslogiikka.Sovellus;
+import sovelluslogiikka.Sovellus;
 
 
 public class Toistoharjoittelu {
