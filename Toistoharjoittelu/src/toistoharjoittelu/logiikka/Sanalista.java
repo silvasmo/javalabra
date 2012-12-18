@@ -22,6 +22,10 @@ public class Sanalista {
         
     }
     
+    public Sanalista() {
+        sanalista = new ArrayList<Sanapari>();
+    }
+    
     public Sanapari annaSanapari() {
         Sanapari pari = this.sanalista.get(0);
         poistaListalta(pari);
@@ -40,12 +44,19 @@ public class Sanalista {
         return this.sanalista;
     }
     
-    public boolean tyhja() {
+    public boolean onTyhja() {
         if (this.sanalista.isEmpty()) {
             return true;
         } else {
             return false;
         }
+    }
+    
+    public void lisaaSanapari(Sanapari pari) {
+        if (pari == null) {
+            return;
+        }
+        this.sanalista.add(pari);
     }
     
 }

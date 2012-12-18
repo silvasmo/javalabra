@@ -47,7 +47,7 @@ public class SanalistaTest {
     
     
     @Test
-    public void konstruktoriLisääSanojaListaan() {
+    public void konstruktoriLisaaSanojaListaan() {
         assertEquals(false, lista.isEmpty());
     }
     
@@ -81,7 +81,7 @@ public class SanalistaTest {
         ArrayList<Sanapari> uusilista = sanalista.annaLista();
         boolean loyto = false;
         for (Sanapari sanapari : uusilista) {
-            if (sanapari == pari) {
+            if (sanapari.equals(pari)) {
                 loyto =true;
                 break;
             }
@@ -96,7 +96,7 @@ public class SanalistaTest {
         ArrayList<Sanapari> uusilista = sanalista.annaLista();
         boolean loyto = false;
         for (Sanapari sanapari : uusilista) {
-            if (sanapari == pari) {
+            if (sanapari.equals(pari)) {
                 loyto =true;
                 break;
             }
@@ -113,18 +113,39 @@ public class SanalistaTest {
     }
     
     @Test
-    public void tyhjaEiAnnaTrueKunAlkioitaListalla() {
-        boolean tyhja = sanalista.tyhja();
+    public void onTyhjaEiAnnaTrueKunAlkioitaListalla() {
+        boolean tyhja = sanalista.onTyhja();
         assertEquals(false, tyhja);
     }
     
     @Test
-    public void tyhjaAntaaTrueKunListaTyhja() {
+    public void onTyhjaAntaaTrueKunListaTyhja() {
         for (int i = 0; i < 8; i++) {
             sanalista.annaSanapari();
         }
-        boolean tyhja = sanalista.tyhja();
+        boolean tyhja = sanalista.onTyhja();
         assertEquals(true, tyhja);
+    }
+    
+    @Test
+    public void listalleLisaysKasvattaaListanKokoa() {
+        sanalista.lisaaSanapari(new Sanapari("maito", "milk"));
+        ArrayList<Sanapari> uusilista = sanalista.annaLista();
+        assertEquals(9, uusilista.size());
+    }
+    
+    @Test
+    public void listalleLisaysLisaaHalutunAlkion() {
+        Sanapari pari = new Sanapari("maito", "milk");
+        Sanalista uusiSanalista = new Sanalista();
+        uusiSanalista.lisaaSanapari(pari);
+        assertEquals(pari.getSana1(), uusiSanalista.annaSanapari().getSana1());
+    }
+    
+    @Test
+    public void listalleEiVoiLisataNullArvoa() {
+        sanalista.lisaaSanapari(null);
+        assertEquals(8, sanalista.annaLista().size());
     }
     
 }

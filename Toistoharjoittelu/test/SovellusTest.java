@@ -46,6 +46,11 @@ public class SovellusTest {
         assertEquals(false, tulos);
     }
     
+    @Test
+    public void haeSanapariPalauttaaEnsimmaisenSanaparinEnsimmaisellaKerralla() {
+        Sanapari pari = sovellus.haeSanapari(3, 1);
+        assertEquals("Helsinki", pari.getSana1());
+    }
     
     
 }

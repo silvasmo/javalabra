@@ -1,4 +1,3 @@
-
 package toistoharjoittelu.sovelluslogiikka;
 
 import java.io.File;
@@ -8,11 +7,14 @@ import toistoharjoittelu.logiikka.Sanalista;
 import toistoharjoittelu.logiikka.Sanapari;
 
 public class Sovellus {
-    Sanalista sanalista;
-    File tiedosto;
-    Scanner lukija;
-    
+
+    private Sanalista sanalista;
+    private Sanalista vaarinArvatut;
+    private File tiedosto;
+    private Scanner lukija;
+
     public Sovellus() {
+        this.vaarinArvatut = new Sanalista();
         this.lukija = new Scanner(System.in);
         this.tiedosto = new File("paakaupunkeja.txt");
         try {
@@ -22,27 +24,50 @@ public class Sovellus {
             return;
         }
     }
-    
+
     public void suorita() {
         System.out.println("Tervetuloa harjoittelemaan toiston avulla!\n");
+        System.out.println("Anna väärin arvattujen sanojen toistoväli:");
+        int toistovali = Integer.parseInt(lukija.nextLine());
         System.out.println("Jos haluat lopettaa, jätä tyhjä rivi.");
         System.out.println("Kirjoita seuraavien sanojen parit:\n");
         this.sanalista.sekoita();
         boolean jatkuu = true;
+        int kerta = 1;
         while (jatkuu) {
-            jatkuu = kysele();
+            Sanapari pari = haeSanapari(toistovali, kerta);
+            if (kerta == toistovali) kerta = 0;
+            else kerta++;
+            if (pari == null) break;
+            jatkuu = kysele(pari);
         }
         System.out.println("\nTervetuloa harjoittelemaan uudelleen!");
     }
     
-    public boolean kysele() {
-        if (this.sanalista.tyhja()) return false;
-        Sanapari pari = this.sanalista.annaSanapari();
+    public Sanapari haeSanapari(int toistovali, int kerta) {
+        if (this.sanalista.onTyhja()) {
+            if (this.vaarinArvatut.onTyhja()) {
+                return null;
+            }
+            return this.vaarinArvatut.annaSanapari();
+        }
+        if (toistovali == kerta) {
+            if (this.vaarinArvatut.onTyhja()) {
+                return this.sanalista.annaSanapari();
+            }
+            return this.vaarinArvatut.annaSanapari();
+        }
+        return this.sanalista.annaSanapari();
+    }
+
+    public boolean kysele(Sanapari pari) {
         System.out.println(pari.getSana1());
         System.out.print("Sanan pari:  ");
         System.out.println("");
         String syote = lukija.nextLine();
-        if (syote.isEmpty()) return false;
+        if (syote.isEmpty()) {
+            return false;
+        }
         boolean tulostus = tarkasta(pari, syote);
         if (tulostus) {
             System.out.println("Oikein!\n");
@@ -51,13 +76,13 @@ public class Sovellus {
         }
         return true;
     }
-    
+
     public boolean tarkasta(Sanapari pari, String syote) {
         if (syote.equals(pari.getSana2())) {
             return true;
         } else {
+            vaarinArvatut.lisaaSanapari(pari);
             return false;
         }
     }
-    
 }
