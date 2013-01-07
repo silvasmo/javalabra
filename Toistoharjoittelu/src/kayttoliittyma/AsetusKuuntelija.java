@@ -4,21 +4,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import sovelluslogiikka.KayttoliittymaSovellus;
+import sovelluslogiikka.Sovellus;
 
+/**
+ * Käyttöliittymäluokka, kuuntelija asetukset-napille
+ * @author Silva Smolander
+ */
 public class AsetusKuuntelija implements ActionListener {
 
     private JFrame frame;
-    private KayttoliittymaSovellus sovellus;
+    private Sovellus sovellus;
 
-    public AsetusKuuntelija(JFrame frame, KayttoliittymaSovellus sovellus) {
+    /**
+     * Luo kuuntelijan asetusnapille
+     * @param frame
+     * @param sovellus 
+     */
+    public AsetusKuuntelija(JFrame frame, Sovellus sovellus) {
         this.frame = frame;
         this.sovellus = sovellus;
     }
 
+    /**
+     * Kysyy toistoväliä käyttäjältä.
+     * Päivittää toistovälin sovellukseen.
+     * Ei tee mitään jos syöte käyttäjältä ei ole kokonaisluku.
+     * @param ae 
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         Object[] possibilities = null;
+        int toistovali = sovellus.getToistovali();
         String vastaus = (String) JOptionPane.showInputDialog(
                 frame,
                 "Kuinka monen sanan välein haluat\n"
@@ -27,8 +43,12 @@ public class AsetusKuuntelija implements ActionListener {
                 JOptionPane.PLAIN_MESSAGE,
                 null,
                 possibilities,
-                "3");
-        int toistovali = Integer.parseInt(vastaus);
-        sovellus.setToistovali(toistovali);
+                "" + toistovali);
+        try {
+            toistovali = Integer.parseInt(vastaus);
+            sovellus.setToistovali(toistovali);
+        } catch (NumberFormatException ex) {
+            return;
+        }
     }
 }

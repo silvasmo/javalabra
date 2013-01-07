@@ -1,0 +1,12 @@
+Aihe: toistoharjoittelu
+Ohjelma, jolla voi harjoitella sanapareja toiston avulla. Esimerkiksi vieraan kielen sanoja, maita ja pääkaupunkeja jne.
+
+Käyttäjä: opiskelija/opettelija
+Toiminnot:
+- harjoittelu
+- väärin arvattujen sanojen uudelleen kyselyn tiheyden muutos
+
+Muu toiminnallisuus:
+- sanaparien luku tiedostosta
+- sanojen järjestyksen sekoitus
+- tiedettyjen sanojen poistuminen kyseltävistä sanoista

@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class KayttoliittymaSovellusTest {
-    private KayttoliittymaSovellus sovellus;
+    private Sovellus sovellus;
     
     public KayttoliittymaSovellusTest() {
     }
@@ -24,7 +24,7 @@ public class KayttoliittymaSovellusTest {
     
     @Before
     public void setUp() {
-        this.sovellus = new KayttoliittymaSovellus();
+        this.sovellus = new Sovellus();
     }
     
     @After

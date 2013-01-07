@@ -11,7 +11,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class SovellusTest {
-    Sovellus sovellus;
+    TekstiSovellus sovellus;
     
     public SovellusTest() {
     }
@@ -26,7 +26,7 @@ public class SovellusTest {
     
     @Before
     public void setUp() {
-        sovellus = new Sovellus();
+        sovellus = new TekstiSovellus();
     }
     
     @After
