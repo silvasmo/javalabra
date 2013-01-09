@@ -17,7 +17,14 @@ import sovelluslogiikka.Sovellus;
  */
 public class Kayttoliittyma implements Runnable {
 
+    /**
+     * Graafisen käyttöliittymän frame
+     */
     private JFrame frame;
+    
+    /**
+     * Sovelluslogiikan sisältävä olio
+     */
     private Sovellus sovellus;
 
 
@@ -26,7 +33,7 @@ public class Kayttoliittyma implements Runnable {
      * Luo sovelluksen valittu tiedosto parametrinä
      */
     public Kayttoliittyma() {
-        Object[] vaihtoehdot = {"paakaupunkeja.txt"};
+        Object[] vaihtoehdot = {"paakaupunkeja.txt", "alkuaineet.txt"};
         String tiedosto = (String) JOptionPane.showInputDialog(
                 frame,
                 "Valitse tiedosto, jota \n"
@@ -70,7 +77,7 @@ public class Kayttoliittyma implements Runnable {
         JButton asetukset = new JButton("Asetukset");
         JLabel ilmoitus = new JLabel("Arvaa sanan pari");
         JLabel tyhja = new JLabel("");
-        JLabel pisteet = new JLabel(sovellus.getPisteet());
+        JLabel pisteet = new JLabel(sovellus.annaPisteet());
 
         ArvausKuuntelija arvausKuuntelija = new ArvausKuuntelija(pisteet, sana1, sana2, sovellus, frame);
         arvaa.addActionListener(arvausKuuntelija);
@@ -85,8 +92,5 @@ public class Kayttoliittyma implements Runnable {
 
     }
 
-    public JFrame getFrame() {
-        return frame;
-    }
 
 }

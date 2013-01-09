@@ -15,10 +15,29 @@ import sovelluslogiikka.Sovellus;
  */
 public class ArvausKuuntelija implements ActionListener {
 
+    /**
+     * Pisteet ilmoittava label
+     */
     private JLabel pisteet;
+    
+    /**
+     * Arvattavan sanan ilmoittava label
+     */
     private JLabel sana1;
+    
+    /**
+     * Tekstikenttä käyttäjän arvaukselle
+     */
     private JTextField sana2;
+    
+    /**
+     * Sovelluslogiikan sisältävä olio
+     */
     private Sovellus sovellus;
+    
+    /**
+     * Ilmoituksia varten tarvittava frame käyttöliittymästä
+     */
     private JFrame frame;
 
     /**
@@ -44,10 +63,10 @@ public class ArvausKuuntelija implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
+        Sanapari pari = sovellus.annaSanapari();
         String toinenSana = sana2.getText();
         boolean oikein = sovellus.tarkasta(toinenSana);
-        tuloksenIlmoitus(oikein);
-        pisteet.setText(sovellus.getPisteet());
+        tuloksenIlmoitus(oikein, pari);
         Sanapari seuraavaPari = sovellus.annaSanapari();
         if (seuraavaPari.getSana1().equals("")) {
             harjoittelunLopetus();
@@ -55,23 +74,30 @@ public class ArvausKuuntelija implements ActionListener {
         }
         sana1.setText(seuraavaPari.getSana1());
         sana2.setText("");
+        pisteet.setText(sovellus.annaPisteet());
 
     }
 
     /**
      * Tekee ikkunan, jossa ilmoitetaan käyttäjälle vastauksen oikeellisuus
+     * ja jos väärin niin lisäksi myös oikea vastaus
      * @param oikein Käyttäjän vastauksen oikeellisuus
      */
-    public void tuloksenIlmoitus(boolean oikein) {
+    public void tuloksenIlmoitus(boolean oikein, Sanapari pari) {
         if (oikein) {
             JOptionPane.showMessageDialog(frame, "Oikein!", "Tulos",
                     JOptionPane.PLAIN_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(frame, "Väärin.", "Tulos",
+            JOptionPane.showMessageDialog(frame, "Väärin.\nOikea vastaus olisi ollut: " 
+                    + pari.getSana2(), "Tulos",
                     JOptionPane.PLAIN_MESSAGE);
         }
     }
 
+    /**
+     * Kysyy käyttäjältä haluaako hän lopettaa harjoittelun,
+     * vai aloittaa ohjelman alusta.
+     */
     public void harjoittelunLopetus() {
         Object[] vaihtoehdot = {"Lopetan",
             "Aloitan alusta"};
@@ -91,8 +117,13 @@ public class ArvausKuuntelija implements ActionListener {
         }
     }
     
+    /**
+     * Antaa käyttäjän valita harjoiteltavan tiedoston.
+     * Luo uuden sovellus-olion valinnan mukaan ja
+     * vaihtaa sovellus-muuttujan viittaamaan siihen.
+     */
     public void valitseTiedosto() {
-        Object[] vaihtoehdot = {"paakaupunkeja.txt"};
+        Object[] vaihtoehdot = {"paakaupunkeja.txt", "alkuaineet.txt"};
         String tiedosto = (String) JOptionPane.showInputDialog(
                 frame,
                 "Valitse tiedosto, jota \n"

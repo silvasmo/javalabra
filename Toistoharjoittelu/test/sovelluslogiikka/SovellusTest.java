@@ -1,7 +1,5 @@
 package sovelluslogiikka;
 
-
-
 import logiikka.Sanapari;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class SovellusTest {
-    TekstiSovellus sovellus;
+    private Sovellus sovellus;
     
     public SovellusTest() {
     }
@@ -26,7 +24,7 @@ public class SovellusTest {
     
     @Before
     public void setUp() {
-        sovellus = new TekstiSovellus();
+        this.sovellus = new Sovellus();
     }
     
     @After
@@ -34,24 +32,111 @@ public class SovellusTest {
     }
     
     @Test
-    public void tarkastusOikeinKunPitaakinOlla() {
-        Sanapari pari = new Sanapari("Helsinki", "Suomi");
-        boolean tulos = sovellus.tarkasta(pari, "Suomi");
-        assertEquals(true, tulos);
+    public void tarkastaTarkastaaOikein() {
+        Sanapari pari = sovellus.annaSanapari();
+        boolean tarkastus = sovellus.tarkasta(pari.getSana2());
+        assertEquals(true, tarkastus);
     }
     
     @Test
-    public void tarkastusVaarinKunPitaakinOlla() {
-        Sanapari pari = new Sanapari("Helsinki", "Suomi");
-        boolean tulos = sovellus.tarkasta(pari, "Ruotsi");
-        assertEquals(false, tulos);
+    public void tarkastusVaarinKunPitaakin() {
+        boolean tarkastus = sovellus.tarkasta("maito");
+        assertEquals(false, tarkastus);
     }
     
     @Test
-    public void haeSanapariPalauttaaEnsimmaisenSanaparinEnsimmaisellaKerralla() {
-        Sanapari pari = sovellus.haeSanapari(3, 1);
-        assertEquals("Helsinki", pari.getSana1());
+    public void tarkastaVaihtaaSeuraavaanSanaanKunOikein() {
+        Sanapari pari = sovellus.annaSanapari();
+        sovellus.tarkasta(pari.getSana2());
+        Sanapari seuraavaPari = sovellus.annaSanapari();
+        assertEquals(false, pari.getSana1().equals(seuraavaPari.getSana1()));
     }
     
+    @Test
+    public void tarkastaVaihtaaSeuraavaanSanaanKunVaarin() {
+        Sanapari pari = sovellus.annaSanapari();
+        sovellus.tarkasta("maito");
+        Sanapari seuraavaPari = sovellus.annaSanapari();
+        assertEquals(false, pari.getSana1().equals(seuraavaPari.getSana1()));
+    }
+    
+    @Test
+    public void tarkastaSanaToimiiKunOikein() {
+        Sanapari pari = new Sanapari("maito", "milk");
+        boolean tarkastus = sovellus.tarkastaSana(pari, "milk");
+        assertEquals(true, tarkastus);
+    }
+    
+    @Test
+    public void tarkastaSanaToimiiKunVaarin() {
+        Sanapari pari = new Sanapari("maito", "milk");
+        boolean tarkastus = sovellus.tarkastaSana(pari, "maito");
+        assertEquals(false, tarkastus);
+    }
+    
+    @Test
+    public void annaSanapariAntaaTyhjanParinKunListatTyhjat() {
+        for (int i = 0; i < 8; i++) {
+            Sanapari pari = sovellus.annaSanapari();
+            sovellus.tarkasta(pari.getSana2());
+        }
+        Sanapari pari = sovellus.annaSanapari();
+        assertEquals("", pari.getSana1());
+    }
+    
+    @Test
+    public void annaSanapariEiAnnaTyhjaaJosVaarinArvattuja() {
+        for (int i = 0; i < 8; i++) {
+            sovellus.tarkasta("maito");
+        }
+        Sanapari pari = sovellus.annaSanapari();
+        assertEquals(false, pari.getSana1().equals(""));
+    }
+    
+    @Test
+    public void setToistovaliToimiiPienellaSyotteella() {
+        sovellus.setToistovali(4);
+        assertEquals(4, sovellus.getToistovali());
+    }
+    
+    @Test
+    public void setToistovaliEiToimiNagatiivisellaSyotteella() {
+        sovellus.setToistovali(-3);
+        assertEquals(3, sovellus.getToistovali());
+    }
+    
+    @Test
+    public void annaPisteetAntaaOikeanMerkkijononAlussa() {
+        String pisteet = sovellus.annaPisteet();
+        assertEquals("pisteitä: 0/8", pisteet);
+    }
+    
+    @Test
+    public void annaPisteetAntaaOikeanMerkkijonoOikeanArvauksenJalkeen() {
+        sovellus.tarkasta(sovellus.annaSanapari().getSana2());
+        String pisteet = sovellus.annaPisteet();
+        assertEquals("pisteitä: 1/8", pisteet);
+    }
+    
+    @Test
+    public void annaPisteetAntaaOikeanMerkkijononVaaranArvauksenJalkeen() {
+        sovellus.tarkasta("milk");
+        String pisteet = sovellus.annaPisteet();
+        assertEquals("pisteitä: 0/8", pisteet);
+    }
+    
+    @Test
+    public void paivitaPisteetToimiiKunOikein() {
+        sovellus.paivitaPisteet(true);
+        String pisteet = sovellus.annaPisteet();
+        assertEquals("pisteitä: 1/8", pisteet);
+    }
+    
+    @Test
+    public void paivitaPisteetEiTeeMitaanKunVaarin() {
+        sovellus.paivitaPisteet(false);
+        String pisteet = sovellus.annaPisteet();
+        assertEquals("pisteitä: 0/8", pisteet);
+    }
     
 }

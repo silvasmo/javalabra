@@ -17,6 +17,7 @@ public class SanalistaTest {
     private Sanalista sanalista;
     private ArrayList<Sanapari> lista;
     private File tiedosto;
+    private Sanapari pari;
     
     public SanalistaTest() {
     }
@@ -39,6 +40,7 @@ public class SanalistaTest {
             lista = new ArrayList<Sanapari>();
             System.out.println("Tiedostoa ei löytynyt");
         }
+        pari = new Sanapari("maito", "milk");
     }
     
     @After
@@ -73,7 +75,6 @@ public class SanalistaTest {
     @Test
     public void sekoitaPalauttaaYhtaPitkanListan() {
         int alkupituus = lista.size();
-        sanalista.sekoita();
         ArrayList<Sanapari> uusilista = sanalista.annaLista();
         int uusipituus = uusilista.size();
         
@@ -82,7 +83,7 @@ public class SanalistaTest {
     
     @Test
     public void poistaaOikeanAlkionListalta() {
-        Sanapari pari = new Sanapari("Helsinki", "Suomi");
+        pari = new Sanapari("Helsinki", "Suomi");
         sanalista.poistaListalta(pari);
         ArrayList<Sanapari> uusilista = sanalista.annaLista();
         boolean loyto = false;
@@ -98,7 +99,7 @@ public class SanalistaTest {
     
     @Test
     public void seuraavaPariPoistaaAlkionListalta() {
-        Sanapari pari = sanalista.annaSanapari();
+        pari = sanalista.annaSanapari();
         sanalista.seuraavaPari();
         ArrayList<Sanapari> uusilista = sanalista.annaLista();
         boolean loyto = false;
@@ -113,7 +114,7 @@ public class SanalistaTest {
     
     @Test
     public void seuraavanParinJalkeenNykyinenPariVaihtunut() {
-        Sanapari pari = sanalista.annaSanapari();
+        pari = sanalista.annaSanapari();
         sanalista.seuraavaPari();
         Sanapari toinenPari = sanalista.annaSanapari();
         assertEquals(false, pari.equals(toinenPari));
@@ -123,13 +124,13 @@ public class SanalistaTest {
     public void seuraavaPariAntaaTyhjanSanaparinJosListaTyhja() {
         Sanalista uusiLista = new Sanalista();
         uusiLista.seuraavaPari();
-        Sanapari pari = uusiLista.annaSanapari();
+        pari = uusiLista.annaSanapari();
         assertEquals("", pari.getSana1());
     }
     
     @Test
     public void poistaListaltaEiPoistaJosAlkiotaEiListalla() {
-        Sanapari pari = new Sanapari("tuli", "fire");
+        pari = new Sanapari("tuli", "fire");
         sanalista.poistaListalta(pari);
         ArrayList<Sanapari> uusilista = sanalista.annaLista();
         assertEquals(lista.size(), uusilista.size());
@@ -152,14 +153,13 @@ public class SanalistaTest {
     
     @Test
     public void listalleLisaysKasvattaaListanKokoa() {
-        sanalista.lisaaSanapari(new Sanapari("maito", "milk"));
+        sanalista.lisaaSanapari(pari);
         ArrayList<Sanapari> uusilista = sanalista.annaLista();
         assertEquals(9, uusilista.size());
     }
     
     @Test
     public void listalleLisaysLisaaHalutunAlkion() {
-        Sanapari pari = new Sanapari("maito", "milk");
         sanalista.lisaaSanapari(pari);
         assertEquals(true, sanalista.annaLista().contains(pari));
     }
@@ -172,7 +172,6 @@ public class SanalistaTest {
     
     @Test
     public void lisaaminenTyhjalleListalleMuuttaaNykyistaParia() {
-        Sanapari pari = new Sanapari("maito", "milk");
         Sanalista uusiSanalista = new Sanalista();
         uusiSanalista.lisaaSanapari(pari);
         assertEquals("maito", uusiSanalista.annaSanapari().getSana1());
@@ -180,14 +179,12 @@ public class SanalistaTest {
     
     @Test
     public void lisaaminenEiTyhjalleListalleEiVaihdaNykyistaParia() {
-        Sanapari pari = new Sanapari("maito", "milk");
         sanalista.lisaaSanapari(pari);
         assertEquals(false, sanalista.annaSanapari().getSana1().equals("maito"));
     }
     
     @Test
     public void lisaysOnnistuuListanKeskelle() {
-        Sanapari pari = new Sanapari("maito", "milk");
         sanalista.lisaaSanapari(2, pari);
         sanalista.seuraavaPari();
         sanalista.seuraavaPari();
@@ -196,14 +193,12 @@ public class SanalistaTest {
     
     @Test
     public void lisaysOnnistuuListanEnsimmaiseksi() {
-        Sanapari pari = new Sanapari("maito", "milk");
         sanalista.lisaaSanapari(0, pari);
         assertEquals(true, sanalista.annaLista().get(0).getSana1().equals("maito"));
     }
     
     @Test
     public void lisaysOnnistuuVaikkaPaikkaSuurempiKuinLista() {
-        Sanapari pari = new Sanapari("maito", "milk");
         sanalista.lisaaSanapari(10, pari);
         assertEquals(true, sanalista.annaLista().get(8).getSana1().equals("maito"));
     }

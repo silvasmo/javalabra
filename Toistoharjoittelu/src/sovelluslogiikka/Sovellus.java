@@ -11,10 +11,25 @@ import logiikka.Sanapari;
  */
 public class Sovellus {
 
+    /**
+     * Sanalista-olio, joka sisältää harjoiteltavat sanaparit
+     */
     private Sanalista sanalista;
-    private File tiedosto;
+
+    /**
+     * Väli, jolla väärin arvattuja sanoja kysytään uudelleen
+     */
     private int toistovali;
+    
+    /**
+     * Käyttäjän pisteet, tiedettyjen sanojen määrä
+     */
     private int pisteet;
+    
+    /**
+     * Sanalistan koko eli kyseltävien sanojen yhteismäärä
+     */
+    private int koko;
 
     /**
      * Luo sovelluksen "paakaupunkeja.txt"-tiedoston harjoittelemiseen
@@ -29,16 +44,15 @@ public class Sovellus {
      * @param tiedostonNimi Harjoiteltavan tiedoston nimi
      */
     public Sovellus(String tiedostonNimi) {
-        this.tiedosto = new File(tiedostonNimi);
         try {
-            this.sanalista = new Sanalista(tiedosto);
+            this.sanalista = new Sanalista(new File(tiedostonNimi));
         } catch (FileNotFoundException ex) {
             System.out.println("Tiedoston lukeminen epäonnistui. Virhe: " + ex.getMessage());
             return;
         }
-        this.sanalista.sekoita();
         this.toistovali = 3;
         this.pisteet = 0;
+        this.koko = this.sanalista.annaLista().size();
     }
 
     /**
@@ -88,11 +102,11 @@ public class Sovellus {
 
     /**
      * Asettaa toistovali-muuttujaan parametrin arvon.
-     * Ei tee mitään jos arvo on pienempi kuin 0.
+     * Ei tee mitään jos arvo on pienempi tai yhtä suuri kuin 0.
      * @param vali Uusi toistovali
      */
     public void setToistovali(int vali) {
-        if (vali >= 0) {
+        if (vali > 0) {
             this.toistovali = vali;
         }
     }
@@ -107,24 +121,21 @@ public class Sovellus {
 
     /**
      * Palauttaa pisteet muuttujan merkkijonona muodossa:
-     * "pisteitä: pisteet"
-     * @return pisteet
+     * "pisteitä: pisteet/sanojen määrä"
+     * @return pisteet Käyttäjän pisteet
      */
-    public String getPisteet() {
-        return "pisteitä: " + this.pisteet;
+    public String annaPisteet() {
+        return "pisteitä: " + this.pisteet + "/" + this.koko;
     }
 
     /**
      * Päivittää pisteet-muuttujan arvoa.
-     * Jos parametri oikein true, lisää pisteitä kahdella,
-     * jos false, vähentää yhdellä.
-     * @param oikein totuusarvo
+     * Jos parametri oikein true, lisää pisteitä yhdellä
+     * @param oikein Totuusarvo
      */
     public void paivitaPisteet(boolean oikein) {
         if (oikein) {
-            pisteet = pisteet + 2;
-        } else {
-            pisteet = pisteet - 1;
+            pisteet++;
         }
     }
 }

@@ -12,7 +12,14 @@ import sovelluslogiikka.Sovellus;
  */
 public class AsetusKuuntelija implements ActionListener {
 
+    /**
+     * Käyttöliittymän frame
+     */
     private JFrame frame;
+    
+    /**
+     * Sovelluslogiikan sisältävä olio
+     */
     private Sovellus sovellus;
 
     /**

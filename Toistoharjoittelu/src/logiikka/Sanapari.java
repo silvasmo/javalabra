@@ -6,7 +6,15 @@ package logiikka;
  * @author Silva Smolander
  */
 public class Sanapari {
+    
+    /**
+     * Ensimmäinen sana merkkijonona
+     */
     private String sana1;
+    
+    /**
+     * Toinen sana merkkijonona
+     */
     private String sana2;
     
     /**
@@ -21,7 +29,7 @@ public class Sanapari {
     
     /**
      * Metodi palauttaa ensimmäisen sanaparin sanoista
-     * @return ensimmäinen sana
+     * @return Ensimmäinen sana
      */
     public String getSana1() {
         return this.sana1;
@@ -29,7 +37,7 @@ public class Sanapari {
     
     /**
      * Metodi palauttaa toisen sanaparin sanoista
-     * @return toinen sana
+     * @return Toinen sana
      */
     public String getSana2() {
         return this.sana2;

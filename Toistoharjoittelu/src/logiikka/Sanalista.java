@@ -12,7 +12,14 @@ import java.util.Scanner;
  */
 public class Sanalista {
 
+    /**
+     * Sanaparit sisältävä lista
+     */
     private ArrayList<Sanapari> sanalista;
+    
+    /**
+     * Sanalista ensimmäinen alkio, arvausvuorossa oleva pari.
+     */
     private Sanapari nykyinenPari;
 
     /**
@@ -30,6 +37,7 @@ public class Sanalista {
             String[] sanat = rivi.split(",");
             this.sanalista.add(new Sanapari(sanat[0], sanat[1]));
         }
+        sekoita();
         this.nykyinenPari = this.sanalista.get(0);
 
     }
@@ -43,7 +51,7 @@ public class Sanalista {
 
     /**
      * Palauttaa ensimmäisenä vuorossa olevan sanaparin
-     * @return nykyinen sanapari
+     * @return Nykyinen sanapari
      */
     public Sanapari annaSanapari() {
         return this.nykyinenPari;
@@ -67,7 +75,7 @@ public class Sanalista {
     /**
      * Sekoittaa sanalista järjestyksen.
      */
-    public void sekoita() {
+    private void sekoita() {
         Collections.shuffle(sanalista);
     }
 
@@ -81,7 +89,7 @@ public class Sanalista {
 
     /**
      * Palauttaa sanalistan ArrayList-muodossa
-     * @return tallennettu sanalista
+     * @return Tallennettu sanalista
      */
     public ArrayList<Sanapari> annaLista() {
         return this.sanalista;
@@ -90,7 +98,7 @@ public class Sanalista {
     /**
      * Palauttaa true jos sanalistassa ei ole alkioita,
      * muuten false.
-     * @return tyhjyyden totuusarvo
+     * @return Tyhjyyden totuusarvo
      */
     public boolean onTyhja() {
         if (this.sanalista.isEmpty()) {
