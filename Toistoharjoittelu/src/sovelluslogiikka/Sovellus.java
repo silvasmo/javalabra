@@ -78,13 +78,16 @@ public class Sovellus {
      * @param sana2 Arvattu sana
      * @return Totuusarvo
      */
-    public boolean tarkastaSana(Sanapari pari, String sana2) {
+    public boolean tarkastaSana(Sanapari pari, String sana2) { 
         if (sana2.trim().equalsIgnoreCase(pari.getSana2().trim())) {
             paivitaPisteet(true);
             return true;
         }
         this.sanalista.lisaaSanapari(toistovali, pari);
         paivitaPisteet(false);
+        if (sanalista.annaSanapari().getSana1().equals("")) {
+            sanalista.seuraavaPari();
+        }
         return false;
     }
 

@@ -61,6 +61,16 @@ public class SovellusTest {
     }
     
     @Test
+    public void josViimeinenSanapariVaarinKysyyUudelleen() {
+        for (int i = 1; i < 8; i++) {
+            Sanapari pari = sovellus.annaSanapari();
+            sovellus.tarkasta(pari.getSana2());
+        }
+        sovellus.tarkasta("maito");
+        assertEquals(false, sovellus.annaSanapari().getSana1().equals(""));
+    }
+    
+    @Test
     public void tarkastaSanaToimiiKunOikein() {
         Sanapari pari = new Sanapari("maito", "milk");
         boolean tarkastus = sovellus.tarkastaSana(pari, "milk");

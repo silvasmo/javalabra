@@ -21,37 +21,29 @@ public class Kayttoliittyma implements Runnable {
      * Graafisen käyttöliittymän frame
      */
     private JFrame frame;
-    
     /**
      * Sovelluslogiikan sisältävä olio
      */
     private Sovellus sovellus;
-
 
     /**
      * Kysyy käyttäjältä, mitä tiedostoa halutaan harjoitella.
      * Luo sovelluksen valittu tiedosto parametrinä
      */
     public Kayttoliittyma() {
-        Object[] vaihtoehdot = {"paakaupunkeja.txt", "alkuaineet.txt"};
-        String tiedosto = (String) JOptionPane.showInputDialog(
-                frame,
-                "Valitse tiedosto, jota \n"
-                + "haluat harjoitella",
-                "Tiedoston valinta",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                vaihtoehdot,
-                "paakaupunkeja.txt");
-        this.sovellus = new Sovellus(tiedosto);
+        valitseTiedosto();
     }
 
     @Override
     public void run() {
         frame = new JFrame("Toistoharjoittelu");
         frame.setPreferredSize(new Dimension(400, 150));
-
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
+        if (this.sovellus == null) {
+            frame.dispose();
+            return;
+        }
 
         luoKomponentit(frame.getContentPane());
 
@@ -79,8 +71,10 @@ public class Kayttoliittyma implements Runnable {
         JLabel tyhja = new JLabel("");
         JLabel pisteet = new JLabel(sovellus.annaPisteet());
 
-        ArvausKuuntelija arvausKuuntelija = new ArvausKuuntelija(pisteet, sana1, sana2, sovellus, frame);
+        ArvausKuuntelija arvausKuuntelija = new ArvausKuuntelija(this, pisteet, sana1, sana2, sovellus, frame);
         arvaa.addActionListener(arvausKuuntelija);
+        arvaa.setDefaultCapable(true);
+        frame.getRootPane().setDefaultButton(arvaa);
 
         AsetusKuuntelija asetusKuuntelija = new AsetusKuuntelija(frame, sovellus);
         asetukset.addActionListener(asetusKuuntelija);
@@ -92,5 +86,37 @@ public class Kayttoliittyma implements Runnable {
 
     }
 
+    /**
+     * Antaa käyttäjän valita harjoiteltavan tiedoston.
+     * Luo uuden sovellus-olion valinnan mukaan ja
+     * vaihtaa sovellus-muuttujan viittaamaan siihen.
+     */
+    public final void valitseTiedosto() {
+        Object[] vaihtoehdot = {"paakaupunkeja.txt", "alkuaineet.txt"};
+        String tiedosto = (String) JOptionPane.showInputDialog(
+                frame,
+                "Valitse tiedosto, jota \n"
+                + "haluat harjoitella",
+                "Tiedoston valinta",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                vaihtoehdot,
+                "paakaupunkeja.txt");
+        boolean loytyy = false;
+        for (int i = 0; i < vaihtoehdot.length; i++) {
+            if (vaihtoehdot[i].equals(tiedosto)) {
+                loytyy = true;
+            }
+        }
+        if (loytyy == false) {
+            return;
+        }
+        this.sovellus = new Sovellus(tiedosto);
 
+    }
+    
+    public JFrame getFrame() {
+        return this.frame;
+    }
+    
 }

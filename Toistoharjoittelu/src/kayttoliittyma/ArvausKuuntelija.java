@@ -19,26 +19,27 @@ public class ArvausKuuntelija implements ActionListener {
      * Pisteet ilmoittava label
      */
     private JLabel pisteet;
-    
     /**
      * Arvattavan sanan ilmoittava label
      */
     private JLabel sana1;
-    
     /**
      * Tekstikenttä käyttäjän arvaukselle
      */
     private JTextField sana2;
-    
     /**
      * Sovelluslogiikan sisältävä olio
      */
     private Sovellus sovellus;
-    
     /**
      * Ilmoituksia varten tarvittava frame käyttöliittymästä
      */
     private JFrame frame;
+    
+    /**
+     * Käyttöliittymaluokan olio tiedostonValinta-metodia varten
+     */
+    private Kayttoliittyma kayttoliittyma;
 
     /**
      * Luo ArvausKuuntelijan
@@ -48,12 +49,13 @@ public class ArvausKuuntelija implements ActionListener {
      * @param sovellus Sovellus
      * @param frame Frame
      */
-    public ArvausKuuntelija(JLabel pisteet, JLabel sana1, JTextField sana2, Sovellus sovellus, JFrame frame) {
+    public ArvausKuuntelija(Kayttoliittyma kayttoliittyma, JLabel pisteet, JLabel sana1, JTextField sana2, Sovellus sovellus, JFrame frame) {
         this.pisteet = pisteet;
         this.sana1 = sana1;
         this.sana2 = sana2;
         this.sovellus = sovellus;
         this.frame = frame;
+        this.kayttoliittyma = kayttoliittyma;
     }
 
     /**
@@ -88,7 +90,7 @@ public class ArvausKuuntelija implements ActionListener {
             JOptionPane.showMessageDialog(frame, "Oikein!", "Tulos",
                     JOptionPane.PLAIN_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(frame, "Väärin.\nOikea vastaus olisi ollut: " 
+            JOptionPane.showMessageDialog(frame, "Väärin.\nOikea vastaus olisi ollut: "
                     + pari.getSana2(), "Tulos",
                     JOptionPane.PLAIN_MESSAGE);
         }
@@ -102,8 +104,8 @@ public class ArvausKuuntelija implements ActionListener {
         Object[] vaihtoehdot = {"Lopetan",
             "Aloitan alusta"};
         int vastaus = JOptionPane.showOptionDialog(frame,
-                "Onneksi olkoon! Tiesit kaikki sanat.\n\n" +
-                "Haluatko lopettaa harjoittelun, vai aloittaa alusta?",
+                "Onneksi olkoon! Tiesit kaikki sanat.\n\n"
+                + "Haluatko lopettaa harjoittelun, vai aloittaa alusta?",
                 "Onneksi olkoon!",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
@@ -113,7 +115,7 @@ public class ArvausKuuntelija implements ActionListener {
         if (vastaus == JOptionPane.NO_OPTION) {
             valitseTiedosto();
         } else {
-            return;
+            frame.dispose();
         }
     }
     
@@ -133,7 +135,16 @@ public class ArvausKuuntelija implements ActionListener {
                 null,
                 vaihtoehdot,
                 "paakaupunkeja.txt");
+        boolean loytyy = false;
+        for (int i = 0; i < vaihtoehdot.length; i++) {
+            if (vaihtoehdot[i].equals(tiedosto)) {
+                loytyy = true;
+            }
+        }
+        if (loytyy == false) {
+            return;
+        }
         this.sovellus = new Sovellus(tiedosto);
+
     }
-    
 }
