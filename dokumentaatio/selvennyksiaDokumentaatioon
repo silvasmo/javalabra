@@ -21,3 +21,6 @@ Sekvenssikaavio esittelee, mitä tapahtuu uutta "sovellusta" luotaessa. Siinä s
 
 
 
+Kolma sekvenssikaavio (ks. sekvenssikaavio3.jpg):
+
+Sekvenssikaavio esittelee, mitä tapahtuu kun Asetukset-nappia painetaan. Ensin haetaan vanha toistoväli ja sitten pyydetään käyttäjältä syötettä ja muutetaan sitten toistoväli-muuttuja sen mukaiseksi.
