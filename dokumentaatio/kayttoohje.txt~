@@ -1,0 +1,16 @@
+Käyttöohje:
+
+- Käynnistä ohjelma ajamalla Toistoharjoittelu.jar tiedosto terminaalissa
+- Valitse harjoiteltava tiedosto listasta
+- Ohjelma näyttää sanan, jonka pari/vastine tulee kirjoittaa tyhjään laatikkoon (esimerkiksi ohjelma antaa pääkaupungin, jolloin tulee kirjoittaa maa, tai alkuaineiden kemialliset merkit ja nimet)
+- Arvaa-napista ohjelma tarkistaa vastauksen oikeellisuuden
+- Mikäli vastaus on oikein, avautuu ponnahdusikkuna, jossa tämä kerrotaan
+- Mikäli vastaus on väärin, avautuu ponnahdusikkuna, jossa tämä sekä oikea vastaus kerrotaan
+- Asetukset-napista painamalla pääsee vaihtamaan väärin arvattujen sanojen toistumisväliä (ei hyväksy nollaa tai tätä pienempää lukua)
+- Kun kaikki sanat on tiedetty, kysyy ohjelma, haluatko lopettaa vai aloittaa alusta
+- Alusta aloittaminen johtaa harjoiteltavan tiedoston valintaan
+
+
+Huomioita:
+
+- Harjoiteltavien tiedostojen täytyy löytyä samasta hakemistosta kuin ajettava jar-tiedosto
