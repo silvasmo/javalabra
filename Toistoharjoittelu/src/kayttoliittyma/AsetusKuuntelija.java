@@ -22,6 +22,9 @@ public class AsetusKuuntelija implements ActionListener {
      */
     private Sovellus sovellus;
     
+    /**
+     * Kayttoliittyma-luokan ilmetymä
+     */
     private Kayttoliittyma kayttoliittyma;
 
     /**

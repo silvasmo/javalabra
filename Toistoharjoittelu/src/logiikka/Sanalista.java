@@ -73,7 +73,7 @@ public class Sanalista {
     }
 
     /**
-     * Sekoittaa sanalista järjestyksen.
+     * Sekoittaa sanalistan järjestyksen.
      */
     private void sekoita() {
         Collections.shuffle(sanalista);

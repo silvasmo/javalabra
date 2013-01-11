@@ -130,7 +130,6 @@ public class SanalistaTest {
     
     @Test
     public void poistaListaltaEiPoistaJosAlkiotaEiListalla() {
-        pari = new Sanapari("tuli", "fire");
         sanalista.poistaListalta(pari);
         ArrayList<Sanapari> uusilista = sanalista.annaLista();
         assertEquals(lista.size(), uusilista.size());

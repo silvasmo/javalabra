@@ -80,16 +80,34 @@ public class Kayttoliittyma implements Runnable {
         asetukset.addActionListener(asetusKuuntelija);
 
         layout.setHorizontalGroup(
-                layout.createSequentialGroup().addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(sana1).addComponent(tyhja).addComponent(asetukset)).addComponent(ilmoitus).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(sana2).addComponent(arvaa).addComponent(pisteet)));
+                layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(sana1)
+                        .addComponent(tyhja)
+                        .addComponent(asetukset))
+                    .addComponent(ilmoitus)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(sana2)
+                        .addComponent(arvaa)
+                        .addComponent(pisteet)));
         layout.setVerticalGroup(
-                layout.createSequentialGroup().addComponent(ilmoitus).addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(sana1).addComponent(sana2)).addComponent(tyhja).addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(asetukset).addComponent(arvaa)).addComponent(pisteet));
+                layout.createSequentialGroup()
+                    .addComponent(ilmoitus)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(sana1)
+                        .addComponent(sana2))
+                    .addComponent(tyhja)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(asetukset)
+                        .addComponent(arvaa))
+                    .addComponent(pisteet));
 
     }
 
     /**
      * Antaa käyttäjän valita harjoiteltavan tiedoston.
      * Luo uuden sovellus-olion valinnan mukaan ja
-     * vaihtaa sovellus-muuttujan viittaamaan siihen.
+     * laittaa sovellus-muuttujan viittaamaan siihen.
      */
     public final void valitseTiedosto() {
         Object[] vaihtoehdot = {"paakaupunkeja.txt", "alkuaineet.txt"};

@@ -114,39 +114,11 @@ public class ArvausKuuntelija implements ActionListener {
                 vaihtoehdot, //the titles of buttons
                 vaihtoehdot[0]); //default button title
         if (vastaus == JOptionPane.NO_OPTION) {
-            valitseTiedosto();
+            kayttoliittyma.valitseTiedosto();
+            this.sovellus = kayttoliittyma.getSovellus();
         } else {
             frame.dispose();
         }
     }
     
-    /**
-     * Antaa käyttäjän valita harjoiteltavan tiedoston.
-     * Luo uuden sovellus-olion valinnan mukaan ja
-     * vaihtaa sovellus-muuttujan viittaamaan siihen.
-     */
-    public void valitseTiedosto() {
-        Object[] vaihtoehdot = {"paakaupunkeja.txt", "alkuaineet.txt"};
-        String tiedosto = (String) JOptionPane.showInputDialog(
-                frame,
-                "Valitse tiedosto, jota \n"
-                + "haluat harjoitella",
-                "Tiedoston valinta",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                vaihtoehdot,
-                "paakaupunkeja.txt");
-        boolean loytyy = false;
-        for (int i = 0; i < vaihtoehdot.length; i++) {
-            if (vaihtoehdot[i].equals(tiedosto)) {
-                loytyy = true;
-            }
-        }
-        if (loytyy == false) {
-            return;
-        }
-        this.sovellus = new Sovellus(tiedosto);
-        kayttoliittyma.setSovellus(sovellus);
-
-    }
 }
