@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="varis" name="sovelluslogiikka.TekstiSovellusTest" tests="2" time="0.048" timestamp="2013-01-10T15:01:54">
+<testsuite errors="0" failures="0" hostname="varis" name="sovelluslogiikka.TekstiSovellusTest" tests="2" time="0.047" timestamp="2013-01-11T08:52:33">
   <properties>
     <property name="default.javac.source" value="1.6" />
     <property name="file.encoding.pkg" value="sun.io" />
@@ -70,7 +70,7 @@
     <property name="file.encoding" value="UTF-8" />
     <property name="dist.javadoc.dir" value="dist/javadoc" />
     <property name="ant.project.default-target" value="default" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner sovelluslogiikka.TekstiSovellusTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/silva/javalabra/Toistoharjoittelu/build/test/results/TEST-sovelluslogiikka.TekstiSovellusTest.xml crashfile=/home/silva/javalabra/Toistoharjoittelu/build/junitvmwatcher5977220805351829649.properties propsfile=/home/silva/javalabra/Toistoharjoittelu/build/junit2130180332346474169.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner sovelluslogiikka.TekstiSovellusTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/silva/javalabra/Toistoharjoittelu/build/test/results/TEST-sovelluslogiikka.TekstiSovellusTest.xml crashfile=/home/silva/javalabra/Toistoharjoittelu/build/junitvmwatcher973289534567867081.properties propsfile=/home/silva/javalabra/Toistoharjoittelu/build/junit5549181712782526207.properties" />
     <property name="built-jar.properties" value="/home/silva/javalabra/Toistoharjoittelu/build/built-jar.properties" />
     <property name="libs.junit.src" value="" />
     <property name="ant.junit.enabletestlistenerevents" value="true" />

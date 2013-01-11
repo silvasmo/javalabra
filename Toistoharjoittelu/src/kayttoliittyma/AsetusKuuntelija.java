@@ -21,15 +21,18 @@ public class AsetusKuuntelija implements ActionListener {
      * Sovelluslogiikan sisältävä olio
      */
     private Sovellus sovellus;
+    
+    private Kayttoliittyma kayttoliittyma;
 
     /**
      * Luo kuuntelijan asetusnapille
      * @param frame
      * @param sovellus 
      */
-    public AsetusKuuntelija(JFrame frame, Sovellus sovellus) {
+    public AsetusKuuntelija(JFrame frame, Kayttoliittyma kayttoliittyma) {
         this.frame = frame;
-        this.sovellus = sovellus;
+        this.kayttoliittyma = kayttoliittyma;
+        this.sovellus = kayttoliittyma.getSovellus();
     }
 
     /**
@@ -41,6 +44,7 @@ public class AsetusKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         Object[] possibilities = null;
+        this.sovellus = kayttoliittyma.getSovellus();
         int toistovali = sovellus.getToistovali();
         String vastaus = (String) JOptionPane.showInputDialog(
                 frame,

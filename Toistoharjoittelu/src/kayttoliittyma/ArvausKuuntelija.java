@@ -65,6 +65,7 @@ public class ArvausKuuntelija implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
+        this.sovellus = kayttoliittyma.getSovellus();
         Sanapari pari = sovellus.annaSanapari();
         String toinenSana = sana2.getText();
         boolean oikein = sovellus.tarkasta(toinenSana);
@@ -145,6 +146,7 @@ public class ArvausKuuntelija implements ActionListener {
             return;
         }
         this.sovellus = new Sovellus(tiedosto);
+        kayttoliittyma.setSovellus(sovellus);
 
     }
 }

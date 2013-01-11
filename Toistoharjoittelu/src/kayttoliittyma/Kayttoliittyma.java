@@ -76,7 +76,7 @@ public class Kayttoliittyma implements Runnable {
         arvaa.setDefaultCapable(true);
         frame.getRootPane().setDefaultButton(arvaa);
 
-        AsetusKuuntelija asetusKuuntelija = new AsetusKuuntelija(frame, sovellus);
+        AsetusKuuntelija asetusKuuntelija = new AsetusKuuntelija(frame, this);
         asetukset.addActionListener(asetusKuuntelija);
 
         layout.setHorizontalGroup(
@@ -117,6 +117,14 @@ public class Kayttoliittyma implements Runnable {
     
     public JFrame getFrame() {
         return this.frame;
+    }
+    
+    public void setSovellus(Sovellus s) {
+        this.sovellus = s;
+    }
+    
+    public Sovellus getSovellus() {
+        return this.sovellus;
     }
     
 }
